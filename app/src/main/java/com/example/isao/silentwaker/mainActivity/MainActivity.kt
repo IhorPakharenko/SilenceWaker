@@ -1,11 +1,14 @@
 package com.example.isao.silentwaker.mainActivity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.example.isao.silentwaker.R
 import com.example.isao.silentwaker.data.db.Alarm
 import com.example.isao.silentwaker.data.db.AppDatabase
+import com.example.isao.silentwaker.detailActivity.DetailActivity
+import com.example.isao.silentwaker.editAlarmActivity.EditAlarmActivity
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -38,7 +41,7 @@ class MainActivity : Activity() {
         setUpAlarmList()
 
         fab.setOnClickListener {
-            //            startActivity(Intent(this, DetailActivity::class.java))
+                        startActivity(Intent(this, EditAlarmActivity::class.java))
             //todo start DetailActivity
             Single.fromCallable {
                 database.alarmDao().insert(Alarm(0, 50, OffsetTime.now()))

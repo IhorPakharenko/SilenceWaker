@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".detailActivity.DetailActivity" />
-        <activity android:name=".editAlarmActivity.EditAlarmActivity"></activity>
+        <activity
+            android:name=".editAlarmActivity.EditAlarmActivity"
+            android:theme="@style/AppTheme.EditAlarmDialog" />
     </application>
 
 </manifest>
