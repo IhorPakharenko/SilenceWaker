@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="blue">@android:color/holo_blue_bright</color>
+
+    <color name="fab_add_alarm_color">@color/blue</color>
+    <color name="alarm_on_color">@color/blue</color>
+</resources>
