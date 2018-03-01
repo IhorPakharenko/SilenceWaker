@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.isao.silentwaker.R
 import com.example.isao.silentwaker.data.db.Alarm
+import kotlinx.android.synthetic.main.item_alarm.view.*
+import org.threeten.bp.format.DateTimeFormatter
 
 /**
  * Created by Isao on 23.02.2018.
@@ -36,7 +38,7 @@ class AlarmsAdapter : RecyclerView.Adapter<AlarmsAdapter.AlarmVH>() {
 
     class AlarmVH(v: View) : RecyclerView.ViewHolder(v) {
         fun bind(alarm: Alarm) {
-//            itemView.tvAlarmId.text = alarm.id.toString()
+            itemView.tvAlarmTime.text = alarm.time.format(DateTimeFormatter.ofPattern("HH:mm"))
         }
     }
 }

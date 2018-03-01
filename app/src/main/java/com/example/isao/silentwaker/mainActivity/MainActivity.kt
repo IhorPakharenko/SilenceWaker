@@ -1,7 +1,7 @@
 package com.example.isao.silentwaker.mainActivity
 
-import android.app.Activity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.isao.silentwaker.R
 import com.example.isao.silentwaker.data.db.Alarm
@@ -16,11 +16,12 @@ import org.threeten.bp.OffsetTime
  * Created by Isao on 23.02.2018.
  */
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var alarmsAdapter: AlarmsAdapter
 
     private lateinit var database: AppDatabase
-
+    //todo maybe change the class of the object used to store time in db
+    //todo change primary key implementation in db
     override fun onCreate(savedInstanceState: Bundle?) {
         //set the default theme back when the app finishes loading
         setTheme(R.style.AppTheme)
