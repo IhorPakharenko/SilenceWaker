@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".detailActivity.DetailActivity" />
+        <activity android:name=".editAlarmActivity.EditAlarmActivity"></activity>
     </application>
 
 </manifest>
