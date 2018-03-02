@@ -6,7 +6,7 @@ import android.widget.SeekBar
 import com.example.isao.silentwaker.R
 import kotlinx.android.synthetic.main.activity_edit_alarm.*
 
-class EditAlarmActivity : AppCompatActivity() {
+class EditAlarmActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,14 +15,24 @@ class EditAlarmActivity : AppCompatActivity() {
 
 
         //NumberPicker widget to set hours value
-        hourPicker.setMinValue(0);
-        hourPicker.setMaxValue(23);
+        hourPicker.minValue = 0
+        hourPicker.maxValue = 23
 
         //NumberPicker widget to set minutes value
-        minutePicker.setMinValue(0);
-        minutePicker.setMaxValue(59);
+        minutePicker.minValue = 0
+        minutePicker.maxValue = 59
 
+        seekBarVolume.max = 100
+        seekBarVolume.progress = 30
 
-
+        seekBarVolume.setOnSeekBarChangeListener(this)
     }
+
+    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+        textVolume.text = resources.getText(R.string.volume).toString() + "${' '}" + progress.toString()
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+    override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 }

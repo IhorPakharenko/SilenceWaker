@@ -21,7 +21,7 @@
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
     <!--Style for edit alarm activity-->
-    <style name="AppTheme.EditAlarmDialog" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="AppTheme.EditAlarmDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowNoTitle">true</item>
 
     </style>
