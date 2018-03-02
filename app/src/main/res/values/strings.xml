@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SilentWaker</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="text_accept">Accept</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="volume">Volume</string>
 </resources>
