@@ -10,7 +10,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import org.threeten.bp.OffsetTime
+import org.threeten.bp.LocalTime
 
 /**
  * Created by Isao on 23.02.2018.
@@ -20,8 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var alarmsAdapter: AlarmsAdapter
 
     private lateinit var database: AppDatabase
-    //todo maybe change the class of the object used to store time in db
-    //todo change primary key implementation in db
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //set the default theme back when the app finishes loading
         setTheme(R.style.AppTheme)
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             //            startActivity(Intent(this, DetailActivity::class.java))
             //todo start DetailActivity
             Single.fromCallable {
-                database.alarmDao().insert(Alarm(0, 50, OffsetTime.now()))
+                database.alarmDao().insert(Alarm(LocalTime.now(), 50))
             }
                     .subscribeOn(Schedulers.io())
                     .subscribe()

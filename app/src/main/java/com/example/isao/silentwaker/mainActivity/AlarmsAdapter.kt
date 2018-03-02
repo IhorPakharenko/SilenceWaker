@@ -34,8 +34,6 @@ class AlarmsAdapter : RecyclerView.Adapter<AlarmsAdapter.AlarmVH>() {
         holder.bind(alarms[position])
     }
 
-
-
     class AlarmVH(v: View) : RecyclerView.ViewHolder(v) {
         fun bind(alarm: Alarm) {
             itemView.tvAlarmTime.text = alarm.time.format(DateTimeFormatter.ofPattern("HH:mm"))

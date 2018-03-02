@@ -1,7 +1,7 @@
 package com.example.isao.silentwaker.data.db
 
 import android.arch.persistence.room.TypeConverter
-import org.threeten.bp.OffsetTime
+import org.threeten.bp.LocalTime
 import org.threeten.bp.format.DateTimeFormatter
 
 /**
@@ -10,15 +10,13 @@ import org.threeten.bp.format.DateTimeFormatter
 
 object Converters {
     @JvmStatic
-    private val formatter = DateTimeFormatter.ISO_OFFSET_TIME
+    private val formatter = DateTimeFormatter.ISO_LOCAL_TIME
 
     @TypeConverter
     @JvmStatic
-    fun toOffsetTime(value: String?): OffsetTime? {
-        return value?.let { formatter.parse(it, OffsetTime::from) }
-    }
+    fun toLocalTime(value: String): LocalTime = formatter.parse(value, LocalTime::from)
 
     @TypeConverter
     @JvmStatic
-    fun fromOffsetTime(value: OffsetTime?) = value?.format(formatter)
+    fun fromLocalTime(value: LocalTime): String = value.format(formatter)
 }
