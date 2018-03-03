@@ -5,6 +5,9 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import io.reactivex.Single
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 
 /**
@@ -17,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         private const val DB_NAME = "SilentWaker"
 
-        var INSTANCE: AppDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
             if (INSTANCE == null) {
@@ -28,6 +31,19 @@ abstract class AppDatabase : RoomDatabase() {
             }
             return INSTANCE as AppDatabase
         }
+
+        fun insert(context: Context, alarm: Alarm): Disposable =
+            prepareSubscription { getInstance(context).alarmDao().insert(alarm) }
+
+
+        fun delete(context: Context, alarm: Alarm): Disposable =
+            prepareSubscription { getInstance(context).alarmDao().delete(alarm) }
+
+
+        private fun prepareSubscription(action: () -> Unit) =
+                Single.fromCallable { action() }
+                        .subscribeOn(Schedulers.io())
+                        .subscribe()
     }
 
     abstract fun alarmDao(): AlarmDao

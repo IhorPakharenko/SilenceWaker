@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.isao.silentwaker.R
 import com.example.isao.silentwaker.data.db.Alarm
-import kotlinx.android.synthetic.main.item_alarm.view.*
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_alarm.*
 import org.threeten.bp.format.DateTimeFormatter
 
 /**
@@ -16,11 +17,10 @@ import org.threeten.bp.format.DateTimeFormatter
 
 class AlarmsAdapter : RecyclerView.Adapter<AlarmsAdapter.AlarmVH>() {
     var alarms: List<Alarm> = ArrayList()
-
-    fun updateList(new: List<Alarm>) {
-        DiffUtil.calculateDiff(AlarmDiffCallback(alarms, new)).dispatchUpdatesTo(this)
-        alarms = new
-    }
+        set(value) {
+            DiffUtil.calculateDiff(AlarmDiffCallback(alarms, value)).dispatchUpdatesTo(this)
+            field = value
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmVH {
         val view = LayoutInflater.from(parent.context)
@@ -34,9 +34,14 @@ class AlarmsAdapter : RecyclerView.Adapter<AlarmsAdapter.AlarmVH>() {
         holder.bind(alarms[position])
     }
 
-    class AlarmVH(v: View) : RecyclerView.ViewHolder(v) {
+    class AlarmVH(override val containerView: View) :
+            RecyclerView.ViewHolder(containerView), LayoutContainer {
+
+        val foreground = containerAlarmForeground
+//        val background = containerAlarmBackground
+
         fun bind(alarm: Alarm) {
-            itemView.tvAlarmTime.text = alarm.time.format(DateTimeFormatter.ofPattern("HH:mm"))
+            tvAlarmTime.text = alarm.time.format(DateTimeFormatter.ofPattern("HH:mm"))
         }
     }
 }

@@ -5,7 +5,12 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="blue">@android:color/holo_blue_bright</color>
+    <color name="white">@android:color/white</color>
+    <color name="blue_grey">#ECEFF1</color>
+    <color name="red">#fa315b</color>
 
     <color name="fab_add_alarm_color">@color/blue</color>
     <color name="alarm_on_color">@color/blue</color>
+    <color name="alarm_list_item_color">@color/blue_grey</color>
+    <color name="delete_color">@color/red</color>
 </resources>

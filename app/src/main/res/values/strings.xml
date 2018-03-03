@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">SilentWaker</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="alarm_removed">An alarm for %1s has been removed</string>
+
+    <string name="delete">Delete</string>
+    <string name="undo">Undo</string>
 </resources>
