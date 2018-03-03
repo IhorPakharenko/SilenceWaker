@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         alarmsAdapter = AlarmsAdapter()
+        val manager = LinearLayoutManager(this)
 
         //called when a user removes an element from the alarm list by swiping
-        val touchHelperCallback = AlarmRecyclerTouchHelper(0,
-                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        val touchHelperCallback = AlarmRecyclerTouchHelper(this) {
             val time = alarmsAdapter.alarms[it.adapterPosition]
                     .time.format(DateTimeFormatter.ofPattern("HH:mm"))
             val alarmBackup = alarmsAdapter.alarms[it.adapterPosition]
@@ -53,8 +53,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         rvAlarm.adapter = alarmsAdapter
-        rvAlarm.layoutManager = LinearLayoutManager(this)
+        rvAlarm.layoutManager = manager
         ItemTouchHelper(touchHelperCallback).attachToRecyclerView(rvAlarm)
+
+        fabAddAlarm.setOnClickListener {
+            //            startActivity(Intent(this, DetailActivity::class.java))
+            //todo start DetailActivity
+            disposables.add(AppDatabase.insert(this, Alarm(LocalTime.now(), 50)))
+        }
 
         AppDatabase.getInstance(this).alarmDao().getAll()
                 .subscribeOn(Schedulers.io())
@@ -62,12 +68,6 @@ class MainActivity : AppCompatActivity() {
                 .doOnNext { alarmsAdapter.alarms = it }
                 .subscribe()
                 .addTo(disposables)
-
-        fabAddAlarm.setOnClickListener {
-            //            startActivity(Intent(this, DetailActivity::class.java))
-            //todo start DetailActivity
-            disposables.add(AppDatabase.insert(this, Alarm(LocalTime.now(), 50)))
-        }
     }
 
     override fun onDestroy() {
