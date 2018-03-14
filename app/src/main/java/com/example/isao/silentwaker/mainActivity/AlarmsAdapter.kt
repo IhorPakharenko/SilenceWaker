@@ -36,10 +36,6 @@ class AlarmsAdapter : RecyclerView.Adapter<AlarmsAdapter.AlarmVH>() {
 
     class AlarmVH(override val containerView: View) :
             RecyclerView.ViewHolder(containerView), LayoutContainer {
-
-        val foreground = containerAlarmForeground
-//        val background = containerAlarmBackground
-
         fun bind(alarm: Alarm) {
             tvAlarmTime.text = alarm.time.format(DateTimeFormatter.ofPattern("HH:mm"))
         }

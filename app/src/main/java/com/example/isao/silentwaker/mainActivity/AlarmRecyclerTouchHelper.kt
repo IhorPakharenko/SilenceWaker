@@ -32,32 +32,9 @@ class AlarmRecyclerTouchHelper(context: Context,
         return true
     }
 
-//    override fun clearView(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?) {
-//        getDefaultUIUtil().clearView((viewHolder as AlarmsAdapter.AlarmVH).foreground)
-//    }
-//
-//    override fun onChildDraw(c: Canvas?, recyclerView: RecyclerView?,
-//                             viewHolder: RecyclerView.ViewHolder?,
-//                             dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-//        getDefaultUIUtil().onDraw(c,
-//                recyclerView,
-//                (viewHolder as AlarmsAdapter.AlarmVH).foreground,
-//                dX,
-//                dY,
-//                actionState,
-//                isCurrentlyActive
-//        )
-//    }
-
-//    override fun clearView(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?) {
-//        getDefaultUIUtil().clearView((viewHolder as AlarmsAdapter.AlarmVH).foreground)
-//    }
-
     override fun onChildDraw(c: Canvas?, recyclerView: RecyclerView?,
                              viewHolder: RecyclerView.ViewHolder,
                              dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-        val swipeToRight = dX > 0
-
         val itemView = viewHolder.itemView
         val itemHeight = itemView.bottom - itemView.top
 
@@ -73,7 +50,8 @@ class AlarmRecyclerTouchHelper(context: Context,
         val deleteIconLeft: Int
         val deleteIconRight: Int
 
-        if (swipeToRight) {
+        // if the swipe is from left to right
+        if (dX > 0) {
             deleteIconLeft = itemView.left + deleteIconMargin
             deleteIconRight = itemView.left + deleteIconMargin + intrinsicWidth
         } else {
